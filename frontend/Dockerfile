@@ -1,6 +1,4 @@
-FROM ubuntu:16.04
-
-MAINTAINER Jeremy Likness <jeremy@jeremylikness.com>
+FROM node:6.6
 
 # Set up a Node environment with the Angular CLI to build a 
 # production-ready Angular image with ahead-of-time compilation
@@ -8,13 +6,6 @@ MAINTAINER Jeremy Likness <jeremy@jeremylikness.com>
 # switch to Bash 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Grab some pre-requisites and install the 6.x version of Node
-RUN apt-get update \
-    && apt-get -y install build-essential \
-    && apt-get -y install curl \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get -y install nodejs
-    
 # install the Angular CLI version
 RUN npm i -g @angular/cli
 
