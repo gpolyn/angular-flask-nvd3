@@ -1,4 +1,4 @@
-FROM node:6.6
+FROM node:6.9
 
 # Set up a Node environment with the Angular CLI to build a 
 # production-ready Angular image with ahead-of-time compilation
@@ -17,4 +17,5 @@ WORKDIR /src
 
 # build and expose the result 
 RUN npm i 
+RUN npm rebuild node-sass
 RUN ng build --prod --aot 
