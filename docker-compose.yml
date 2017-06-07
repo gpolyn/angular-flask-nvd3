@@ -21,6 +21,18 @@ services:
             - db
         ports:
             - "3001:3000"
+    flask:
+        build: ./flask
+        expose:
+            - "8000"
+        links:
+            - db
+        env_file: .env
+        volumes:
+            - ./flask:/usr/src/app
+        ports:
+            - "8000:8000"
+        command: "/usr/local/bin/gunicorn -w 2 -b 0.0.0.0:8000 app:app"
     ngbuild:
         build: ./frontend
         volumes:
