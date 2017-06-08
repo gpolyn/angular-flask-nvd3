@@ -13,6 +13,18 @@ services:
       build: ./mongo-seed
       links:
         - db
+    descriptions:
+        build: ./descriptions
+        links: 
+            - db
+        ports:
+            - "3000:3000"
+    nutrients:
+        build: ./nutrients
+        links:
+            - db
+        ports:
+            - "3001:3000"
     flask:
         build: ./flask
         expose:
@@ -26,16 +38,16 @@ services:
             - "8000:8000"
         command: "/usr/local/bin/gunicorn -w 2 -b 0.0.0.0:8000 app:app"
     ngbuild:
-        build: ./angular-nvd3
+        build: ./frontend
         volumes:
-            - blah:/src/dist
+            - ng2:/src/dist
     web:
         image: nginx 
         volumes:
-            - blah:/usr/share/nginx/html
+            - ng2:/usr/share/nginx/html
         ports:
             - "80:80"
         depends_on:
-            - flask
+            - descriptions
 volumes:
-    blah: {}
+    ng2: {}

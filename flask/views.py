@@ -1,5 +1,6 @@
 import os
 import json
+import pprint
 from bson.json_util import dumps
 import logging
 from pymongo import MongoClient
@@ -11,8 +12,9 @@ db = client.usda
 
 @app.route('/api', methods=['GET'])
 def api():
-    posts = db.foodgroups.find();
-    json_response = dumps(posts)
+    a = db.pie.find_one()
+    app.logger.info(a['data'])
+    json_response = dumps(a['data'])
     return Response(json_response,
                     status=200,
                     mimetype='application/json')
